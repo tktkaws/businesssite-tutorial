@@ -79,4 +79,11 @@
                             </div>
                         </div>
                         <div class="page-container">
+                            <div class="bread_crumb">
+                                <?php
+if ( function_exists('bcn_display') ){
+	bcn_display();
+}
+?>
+                            </div>
                             <?php endif; ?>
