@@ -8,7 +8,8 @@
     <meta name="description" content="<?php bloginfo('description'); ?>" />
     <title><?php echo esc_html(wp_get_document_title()); ?></title>
 
-    <link rel="shortcut icon" href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/favicon.ico" />
+    <link rel="shortcut icon"
+        href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/favicon.ico" />
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Vollkorn:400i" rel="stylesheet" />
     </script>
@@ -21,8 +22,10 @@
             <div class="header-inner">
                 <div class="logo">
                     <a class="logo-header" href="/pacificmall">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/logo-main.svg" class="main-logo" alt="PACIFIC MALL DEVELOPMENT" />
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/logo-fixed.svg" class="fixed-logo" alt="PACIFIC MALL DEVELOPMENT" />
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/logo-main.svg"
+                            class="main-logo" alt="PACIFIC MALL DEVELOPMENT" />
+                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/logo-fixed.svg"
+                            class="fixed-logo" alt="PACIFIC MALL DEVELOPMENT" />
                     </a>
                 </div>
                 <button class="toggle-menu js-toggoleNav">
@@ -51,28 +54,29 @@
             </div>
         </header>
         <?php if (is_front_page()) : ?>
-            <section class="section-contents" id="keyvisual">
-                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bg-section-keyvisual.jpg" alt="MAIN IMAGE" />
-                <div class="wrapper">
-                    <h1 class="site-title">Connecting the future.</h1>
-                    <p class="site-caption">
-                        私たちパシフィックモール開発は<br />
-                        世界各地のショッピングモール開発を通じて<br />
-                        人と人、人と地域を結ぶお手伝いをしています。
-                    </p>
-                </div>
-            </section>
+        <section class="section-contents" id="keyvisual">
+            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bg-section-keyvisual.jpg"
+                alt="MAIN IMAGE" />
+            <div class="wrapper">
+                <h1 class="site-title">Connecting the future.</h1>
+                <p class="site-caption">
+                    私たちパシフィックモール開発は<br />
+                    世界各地のショッピングモール開発を通じて<br />
+                    人と人、人と地域を結ぶお手伝いをしています。
+                </p>
+            </div>
+        </section>
         <?php else : ?>
-            <div class="wrap">
-                <div id="primary" class="content-area">
-                    <main>
-                        <div class="page-contents">
-                            <div class="page-head">
-                                <!-- imgタグ出力 -->
-                                <div class="wrapper">
-                                    <span class="page-title-en"></span>
-                                    <h2 class="page-title"><?php echo get_main_title(); ?></h2>
-                                </div>
+        <div class="wrap">
+            <div id="primary" class="content-area">
+                <main>
+                    <div class="page-contents">
+                        <div class="page-head">
+                            <?php echo get_main_image(); ?>
+                            <div class="wrapper">
+                                <span class="page-title-en"></span>
+                                <h2 class="page-title"><?php echo get_main_title(); ?></h2>
                             </div>
-                            <div class="page-container">
+                        </div>
+                        <div class="page-container">
                             <?php endif; ?>
