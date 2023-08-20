@@ -24,6 +24,10 @@ function get_main_title()
 		return get_the_title();
 	elseif (is_category()) :
 		return single_cat_title();
+	elseif (is_search()) :
+		return ' サイト内検索結果';
+	elseif (is_404()) :
+		return ' ページが見つかりません';
 	endif;
 }
 
@@ -74,6 +78,8 @@ function get_main_image()
 		return get_the_post_thumbnail(get_queried_object()->ID, 'detail');
 	elseif (is_category('news') || is_singular('post')) :
 		return '<img src="' . get_template_directory_uri() . '/assets/images/bg-page-news.jpg" />';
+	elseif (is_search() || is_404()) :
+		return '<img src="' . get_template_directory_uri() . '/assets/images/bg-page-search.jpg">';
 	else :
 		return '<img src="' . get_template_directory_uri() . '/assets/images/bg-page-dummy.png" />';
 	endif;
@@ -96,3 +102,59 @@ function get_specific_posts($post_type, $taxonomy = null, $term = null, $number 
 	$specific_posts = new WP_Query($args);
 	return $specific_posts;
 }
+
+// ページャー
+function page_navi()
+{
+	the_posts_pagination(array(
+		'mid_size' => 2,
+		'prev_text' => '<',
+		'next_text' => '>',
+	));
+}
+
+// 抜粋機能
+function cms_excerpt_more()
+{
+	return '...';
+}
+add_filter('excerpt_more', 'cms_excerpt_more');
+
+function cms_excerpt_length()
+{
+	return 80;
+}
+add_filter('excerpt_mblength', 'cms_excerpt_length');
+
+// 抜粋機能を固定ページに使えるよう設定
+add_post_type_support('page', 'excerpt');
+
+// 抜粋機能の文字数を変更可能に設定
+function get_flexible_excerpt($number)
+{
+	$value = get_the_excerpt();
+	$value = wp_trim_words($value, $number, '...');
+	return $value;
+}
+
+//get_the_excerpt() で取得する文字列に改行タグを挿入
+function apply_excerpt_br($value)
+{
+	return nl2br($value);
+}
+add_filter('get_the_excerpt', 'apply_excerpt_br');
+
+// ウィジェット機能を有効化
+function theme_widgets_init()
+{
+	register_sidebar(array(
+		'name' => ' サイドバーウィジェットエリア',
+		'id' => 'primary-widget-area',
+		'description' => ' 固定ページのサイドバー',
+		'before_widget' => '<aside class="side-inner">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h4 class="title">',
+		'after_title' => '</h4>',
+	));
+}
+add_action('widgets_init', 'theme_widgets_init');
