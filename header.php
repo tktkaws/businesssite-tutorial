@@ -40,9 +40,9 @@
                         ]);
                         ?>
                     </nav>
-                    <form class="search-form" role="search" method="get" action="">
+                    <form class="search-form" role="search" method="get" action="<?php echo esc_url(home_url()); ?>">
                         <div class="search-box">
-                            <input type="text" class="search-input" name="" placeholder="キーワードを入力してください" />
+                            <input type="text" class="search-input" name="s" placeholder="キーワードを入力してください" />
                             <button type="submit" class="button-submit"></button>
                         </div>
                         <div class="search-buttons">
@@ -59,11 +59,7 @@
                 alt="MAIN IMAGE" />
             <div class="wrapper">
                 <h1 class="site-title">Connecting the future.</h1>
-                <p class="site-caption">
-                    私たちパシフィックモール開発は<br />
-                    世界各地のショッピングモール開発を通じて<br />
-                    人と人、人と地域を結ぶお手伝いをしています。
-                </p>
+                <p class="site-caption"><?php echo get_the_excerpt(); ?></p>
             </div>
         </section>
         <?php else : ?>
@@ -81,9 +77,9 @@
                         <div class="page-container">
                             <div class="bread_crumb">
                                 <?php
-if ( function_exists('bcn_display') ){
-	bcn_display();
-}
-?>
+                                    if (function_exists('bcn_display')) {
+                                        bcn_display();
+                                    }
+                                    ?>
                             </div>
                             <?php endif; ?>
