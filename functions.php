@@ -22,12 +22,15 @@ function get_main_title()
 		return $category_obj[0]->name;
 	elseif (is_page()) :
 		return get_the_title();
-	elseif (is_category()) :
+	elseif (is_category() || is_tax()) :
 		return single_cat_title();
 	elseif (is_search()) :
 		return ' サイト内検索結果';
 	elseif (is_404()) :
 		return ' ページが見つかりません';
+	elseif (is_singular('daily_contribution')) :
+		$term_obj = get_the_terms(get_queried_object()->ID, 'event');
+		return $term_obj[0]->name;
 	endif;
 }
 
@@ -88,6 +91,11 @@ function get_main_image()
 // 特定の記事を抽出する関数
 function get_specific_posts($post_type, $taxonomy = null, $term = null, $number = -1)
 {
+	if (!$term) :
+		$terms_obj = get_terms('event');
+		$term = wp_list_pluck($terms_obj, 'slug');
+	endif;
+
 	$args = array(
 		'post_type' => $post_type,
 		'tax_query' => array(
@@ -95,7 +103,7 @@ function get_specific_posts($post_type, $taxonomy = null, $term = null, $number 
 				'taxonomy' => $taxonomy,
 				'field' => 'slug',
 				'terms' => $term,
-			),
+			)
 		),
 		'posts_per_page' => $number,
 	);
