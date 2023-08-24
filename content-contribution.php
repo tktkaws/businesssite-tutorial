@@ -1,10 +1,10 @@
 <article class="article-card">
-    <a class="card-link" href="<?php echo get_term_link( $term ); ?>">
+    <a class="card-link" href="<?php echo get_term_link($term); ?>">
         <div class="image">
             <?php
-$image_id = get_field( 'event_image', $term->taxonomy. '_'. $term->term_id );
-echo wp_get_attachment_image( $image_id, 'contribution' );
-?>
+            $image_id = get_field('event_image', $term->taxonomy . '_' . $term->term_id);
+            echo wp_get_attachment_image($image_id, 'contribution');
+            ?>
         </div>
         <div class="body">
             <p class="title"><?php echo $term->name; ?></p>
